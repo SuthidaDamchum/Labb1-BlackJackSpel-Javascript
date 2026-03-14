@@ -1,32 +1,28 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black-Jack </title>
-    <link rel="stylesheet" href="blackjack.css">
-</head>
-<body>
-        <h3>Dealer: <span id="DealerSum" ></span></h3>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Black-Jack</title>
+    <link rel="stylesheet" href="blackjack.css" />
+    <script src="blackjack.js" defer></script>
+  </head>
+  <body>
+    <h3>Dealer: <span id="DealerSum"></span></h3>
 
-        <div id="DealerCards">
-            <img id="hiddenCard" src="./cards/Back.png">
-        </div>
+    <div id="DealerCards">
+      <img id="hiddenCard" src="./cards/Back.png" />
+    </div>
 
-        <h3>Player: <span id="PlayerSum" ></span></h3>
-        <div id="PlayerCards">
-        </div>
+    <h3>Player: <span id="PlayerSum"></span></h3>
+    <div id="PlayerCards"></div>
 
-        <br>
+    <br />
 
-        <button id="moreCard">Hit</button>
-        <button id="stop">Stand</button>
-        <p id="results"> </p>
+    <button id="moreCard">Hit</button>
+    <button id="stop">Stand</button>
+    <p id="results"></p>
 
-        <br>
-        <button id="newGame">New Game</button>
-
-
-</body>
+    <button id="newGame">Deal</button>
+  </body>
 </html>

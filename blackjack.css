@@ -1,0 +1,82 @@
+
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center ;
+    background-image: url("./cards/blackjackbild.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+#DealerCards img{
+      height: 165px;
+  width: 140px;
+  margin: 2px;
+}
+
+#PlayerCards img{
+  height: 165px;
+  width: 140px;
+  margin: 2px;
+}
+
+#moreCard{
+   height: 50px;
+  width: 100px;
+  font-size: 20px;
+   background-color: white;
+    color: black; /* This ensures the text stays readable! */
+    border: none; /* Removes the default browser border */
+    padding: 10px 30px; /* Makes the button a comfortable size */
+    border-radius: 10px; /* Rounds the corners for a cleaner look */
+    cursor: pointer; /* Changes the mouse icon to a hand when hovering */
+}
+
+#stop{
+   height: 50px;
+  width: 100px;
+  font-size: 20px;
+   background-color: white;
+    color: black; /* This ensures the text stays readable! */
+    border: none; /* Removes the default browser border */
+    padding: 10px 30px; /* Makes the button a comfortable size */
+    border-radius: 10px; /* Rounds the corners for a cleaner look */
+    cursor: pointer; /* Changes the mouse icon to a hand when hovering */
+
+}
+
+#newGame{
+     height: 50px;
+  width: 100px;
+  font-size: 18px;
+    background-color: white;
+    color: black; /* This ensures the text stays readable! */
+    border: none; /* Removes the default browser border *//* Makes the button a comfortable size */
+    border-radius: 10px; /* Rounds the corners for a cleaner look */
+    cursor: pointer; 
+}
+
+#results{
+    font-size: 22px;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 30 px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+h3{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-top: 100px;
+}
+
+
+ #DealerSum, #PlayerSum {
+    color: #ffcc00;            
+    font-weight: bold;
+}

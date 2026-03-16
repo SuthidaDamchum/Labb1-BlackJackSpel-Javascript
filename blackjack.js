@@ -8,6 +8,8 @@ window.onload = function () {
   buildDeck();
   shuffleDeck();
   startGame();
+
+  document.getElementById("moreCard").addEventListener("click", hit);
 };
 
 let deck = [];
@@ -119,7 +121,16 @@ if (playerSum > 21) {
   message = "You Win!";
 } else {
   message = "Dealer Wins!";
+  doucment.getElementById("results").innerText = message;
 }
-doucment.getElementById("results").innerText = message;
 
-function moreCard(card) {}
+function hit() {
+  let card = deck.pop();
+  playerSum += getCardValue(card);
+  playerAcesCount = checkAces(card);
+
+  let cardImage = document.createElement("img");
+  cardImage.src = "./cards/" + card + ".png";
+  document.getElementById("PlayerCards").append(cardImage);
+  document.getElementById("playerSum").innerText = playerSum;
+}

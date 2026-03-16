@@ -1,13 +1,15 @@
+var playerSum = 0;
+var dealerSum = 0;
+var playerAceCount = 0;
+var dealerAceCount = 0;
 var hiddenCard;
 
 window.onload = function () {
   buildDeck();
-
+  shuffleDeck();
 };
 
-
-
-let deck = []
+let deck = [];
 function buildDeck() {
   let values = [
     "ace",
@@ -33,4 +35,50 @@ function buildDeck() {
     }
   }
   console.log(deck);
+}
+
+function shuffleDeck() {
+  for (let i = 0; i < deck.length; i++) {
+    let randomIndex = Math.floor(Math.random() * deck.length);
+    let temporaryValue = deck[i];
+    deck[i] = deck[randomIndex];
+    deck[randomIndex] = temporaryValue;
+  }
+  console.log(deck);
+}
+
+function startGame() {
+  hiddenCard = deck.pop();
+  dealerSum += getCardValue(hiddenCard);
+  dealerAceCount += checkAcs(card)
+  
+  let card = deck.pop();
+  playerSum += getCardValue(value)
+  dealerAceCount += checkAcs(card)
+}
+
+function getCardValue(card) {
+  let splitCard = card.split("_of_");
+  let value = splitCard[0];
+
+  if (isNaN(value)) {
+    if (value == "ace") {
+      return 11;
+    }
+    return 10;
+  }
+  return parseInt(value);
+
+
+function checkAcs(){
+
+  let splitCard = card.split("_of_");
+  let value = splitCard[0]
+
+  if (value === "ace"){
+        return 1;
+      }
+        return 0; 
+}
+   
 }

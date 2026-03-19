@@ -10,6 +10,7 @@ window.onload = function () {
   startGame();
 
   document.getElementById("moreCard").addEventListener("click", hit);
+  document.getElementById("stop").addEventListener("click", stand);
 };
 
 let deck = [];
@@ -110,17 +111,25 @@ function checkAces(card) {
 }
 
 let message = "";
+let messageColor = "white";
+
+let resultsElement = document.getElementById("results");
 
 if (playerSum > 21) {
-  message = "Dealer Wins!";
+  message = "You Lose!!";
+  messageColor = "#FF4d4d";
 } else if (dealerSum > 21) {
-  message = "You Win!";
+  message = "You win!!";
+  messageColor = "#4CAF50";
 } else if (playerSum == dealerSum) {
   message = "Tie!";
+  messageColor = "white";
 } else if (playerSum > dealerSum) {
-  message = "You Win!";
+  message = "You Win!!";
+  messageColor = "#4CAF50";
 } else {
-  message = "Dealer Wins!";
+  message = "You Lose!";
+  messageColor = "#FF4d4d";
   doucment.getElementById("results").innerText = message;
 }
 
@@ -133,4 +142,25 @@ function hit() {
   cardImage.src = "./cards/" + card + ".png";
   document.getElementById("PlayerCards").append(cardImage);
   document.getElementById("playerSum").innerText = playerSum;
+
+  if (playerSum > 21) {
+    let message = "Dealer Wins!";
+    let resultsElement = document.getElementById("results");
+    resultsElement.innerText = message;
+    document.getElementById("moreCard").disabled = true;
+
+    //Delaer Visar kort hur man gör då?
+    // Dealer visar kort direkt när jag öppnar
+  }
+}
+
+function stand() {
+  document.getElementById("stop").disabled = true;
+  //Delaer Show Card and the result
+  //Palyer still shwoing result
+  let hiddenCardImg = document.getElementById("hiddencard");
+  hiddenCardImg.src = "./cards/" + hiddenCard + ".png";
+  document.getElementById("dealerCard").append(hiddenCardImg);
+
+  // document.getElementById("playerSum").innerText = playerSum;
 }

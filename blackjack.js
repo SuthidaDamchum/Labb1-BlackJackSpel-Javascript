@@ -11,6 +11,7 @@ window.onload = function () {
 
   document.getElementById("moreCard").addEventListener("click", hit);
   document.getElementById("stop").addEventListener("click", stand);
+  document.getElementById("newGame").addEventListener("click", deal);
 };
 
 let deck = [];
@@ -60,14 +61,13 @@ function startGame() {
   dealerSum += getCardValue(hiddenCard);
   dealerAcesCount += checkAces(hiddenCard);
 
-  //Andra
+  //Dealerns kort 2
   let card = deck.pop();
   let cardImage = document.createElement("img");
   cardImage.src = "./cards/" + card + ".png";
   dealerSum += getCardValue(card);
   dealerAcesCount += checkAces(card);
   document.getElementById("DealerCards").append(cardImage);
-  document.getElementById("dealerSum").innerText = dealerSum;
 
   //Player 1
   card = deck.pop();
@@ -110,29 +110,6 @@ function checkAces(card) {
   return 0;
 }
 
-let message = "";
-let messageColor = "white";
-
-let resultsElement = document.getElementById("results");
-
-if (playerSum > 21) {
-  message = "You Lose!!";
-  messageColor = "#FF4d4d";
-} else if (dealerSum > 21) {
-  message = "You win!!";
-  messageColor = "#4CAF50";
-} else if (playerSum == dealerSum) {
-  message = "Tie!";
-  messageColor = "white";
-} else if (playerSum > dealerSum) {
-  message = "You Win!!";
-  messageColor = "#4CAF50";
-} else {
-  message = "You Lose!";
-  messageColor = "#FF4d4d";
-  doucment.getElementById("results").innerText = message;
-}
-
 function hit() {
   let card = deck.pop();
   playerSum += getCardValue(card);
@@ -143,24 +120,71 @@ function hit() {
   document.getElementById("PlayerCards").append(cardImage);
   document.getElementById("playerSum").innerText = playerSum;
 
-  if (playerSum > 21) {
-    let message = "Dealer Wins!";
+  if (playerSum > 21 && playerSum === 21) {
+    // let message = "Dealer Wins!";
     let resultsElement = document.getElementById("results");
     resultsElement.innerText = message;
+    ShowDealerCard = document;
     document.getElementById("moreCard").disabled = true;
-
-    //Delaer Visar kort hur man gör då?
-    // Dealer visar kort direkt när jag öppnar
   }
 }
 
-function stand() {
-  document.getElementById("stop").disabled = true;
-  //Delaer Show Card and the result
-  //Palyer still shwoing result
-  let hiddenCardImg = document.getElementById("hiddencard");
-  hiddenCardImg.src = "./cards/" + hiddenCard + ".png";
-  document.getElementById("dealerCard").append(hiddenCardImg);
+async function stand() {
+  debugger;
 
-  // document.getElementById("playerSum").innerText = playerSum;
+  document.getElementById("stop").disabled = true;
+  document.getElementById("moreCard").disabled = true;
+  document.getElementById("hiddenCard").src = "./cards/" + hiddenCard + ".png";
+  document.getElementById("dealerSum").innerText = dealerSum;
+
+  await delay(1000);
+
+  while (dealerSum < 17) {
+    console.log("Dealer drar ett kort...");
+    let moreCardToDealer = deck.pop();
+    dealerSum += getCardValue(moreCardToDealer);
+
+    let newCardToDealerImg = document.createElement("img");
+    newCardToDealerImg.src = "./cards/" + moreCardToDealer + ".png";
+    document.getElementById("DealerCards").append(newCardToDealerImg);
+    document.getElementById("dealerSum").innerText = dealerSum;
+
+    await delay(1000);
+  }
+
+  let message = "";
+  let messageColor = "white";
+
+  let resultsElement = document.getElementById("results");
+
+  if (playerSum > 21) {
+    message = "You Lose!!";
+    messageColor = "#FF4d4d";
+  } else if (dealerSum > 21) {
+    message = "You win!!";
+    messageColor = "#4CAF50";
+  } else if (playerSum == dealerSum) {
+    message = "Tie!";
+    messageColor = "yellow";
+  } else if (playerSum > dealerSum) {
+    message = "You Win!!";
+    messageColor = "#4CAF50";
+  } else {
+    message = "You Lose!";
+    messageColor = "#FF4d4d";
+  }
+  resultsElement.innerText = message;
+  resultsElement.style.color = messageColor;
+
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 }
+
+function deal() {
+  location.reload();
+}
+
+//TODOLIST
+//21 om player 21 och dealer mindre än 21 då player vinner direkt
+//DO function CheckBlackJack

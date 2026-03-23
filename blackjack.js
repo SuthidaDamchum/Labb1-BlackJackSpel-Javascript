@@ -4,11 +4,13 @@ var playerAcesCount = 0;
 var dealerAcesCount = 0;
 var hiddenCard;
 
+var wallet = Number(localStorage.getItem("savedWallet")) || 1000;
+
 window.onload = function () {
   buildDeck();
   shuffleDeck();
   startGame();
-
+  document.getElementById("balance").innerText = wallet;
   document.getElementById("moreCard").addEventListener("click", hit);
   document.getElementById("stop").addEventListener("click", stand);
   document.getElementById("newGame").addEventListener("click", deal);
@@ -53,7 +55,7 @@ function shuffleDeck() {
   console.log(deck);
 }
 
-function startGame() {
+async function startGame() {
   document.getElementById("newGame").disabled = true;
   console.log("Nu startar spelet!");
   hiddenCard = deck.pop();
@@ -90,74 +92,69 @@ function startGame() {
   document.getElementById("PlayerCards").append(cardImage);
   document.getElementById("playerSum").innerText = playerSum;
   // playerSum = 21;
+
   if (playerSum === 21 || dealerSum === 21) {
+    canHit = false;
+
+    await delay(600);
     checkWinner();
   }
 }
 
+let canHit = true;
+
 function hit() {
+  if (!canHit) {
+    return;
+  }
+
   let card = deck.pop();
+
   playerSum += getCardValue(card);
-  playerAcesCount = checkAces(card);
+  playerAcesCount += checkAces(card);
 
   let cardImage = document.createElement("img");
   cardImage.src = "./cards/" + card + ".png";
   document.getElementById("PlayerCards").append(cardImage);
-  document.getElementById("playerSum").innerText = playerSum;
   playerSum = reduceAce(playerSum, playerAcesCount);
-  checkWinner();
+
+  document.getElementById("playerSum").innerText = playerSum;
+
+  if (playerSum > 21) {
+    canHit = false;
+    document.getElementById("moreCard").disabled = true;
+    checkWinner();
+  }
 }
 
 async function stand() {
   document.getElementById("stop").disabled = true;
   document.getElementById("moreCard").disabled = true;
+
   document.getElementById("hiddenCard").src = "./cards/" + hiddenCard + ".png";
+
   document.getElementById("dealerSum").innerText = dealerSum;
 
-  await delay(1000);
+  await delay(600);
 
   while (dealerSum < 17) {
     let moreCardToDealer = deck.pop();
     dealerSum += getCardValue(moreCardToDealer);
+    dealerAcesCount += checkAces(moreCardToDealer);
+    dealerSum = reduceAce(dealerSum, dealerAcesCount);
 
     let newCardToDealerImg = document.createElement("img");
     newCardToDealerImg.src = "./cards/" + moreCardToDealer + ".png";
     document.getElementById("DealerCards").append(newCardToDealerImg);
-    dealerSum = reduceAce(dealerSum, dealerAcesCount);
+
+    await delay(600);
   }
-  document.getElementById("dealerSum").innerText = dealerSum;
   checkWinner();
 }
 
 function deal() {
   location.reload();
 }
-
-// let message = "";
-// let messageColor = "white";
-// let resultsElement = document.getElementById("results");
-
-// if (playerSum > 21) {
-//   message = "You Lose!!";
-//   messageColor = "#FF4d4d";
-// } else if (dealerSum > 21) {
-//   message = "You win!!";
-//   messageColor = "#4CAF50";
-// } else if (playerSum == dealerSum) {
-//   message = "Tie!";
-//   messageColor = "yellow";
-// } else if (playerSum > dealerSum) {
-//   message = "You Win!!";
-//   messageColor = "#4CAF50";
-// } else {
-//   message = "You Lose!";
-//   messageColor = "#FF4d4d";
-// }
-// resultsElement.innerText = message;
-// resultsElement.style.color = messageColor;
-// document.getElementById("newGame").disabled = false;
-
-// }
 
 function checkWinner() {
   let message = "";
@@ -166,21 +163,33 @@ function checkWinner() {
   document.getElementById("hiddenCard").src = "./cards/" + hiddenCard + ".png";
   document.getElementById("dealerSum").innerText = dealerSum;
 
-  if (playerSum > 21) {
+  if (playerSum == 21 && dealerSum !== 21) {
+    message = "BLACKJACK! ★";
+    messageColor = "#FFD700";
+    updateWallet(150);
+  } else if (dealerSum === 21 && playerSum !== 21) {
+    message = "Dealer Blackjack!";
+    messageColor = "#FF4d4d";
+    updateWallet(-150);
+  } else if (playerSum > 21) {
     message = "Dealer Wins!";
     messageColor = "#FF4d4d";
+    updateWallet(-100);
   } else if (dealerSum > 21) {
     message = "You Win!";
     messageColor = "#4CAF50";
+    updateWallet(100);
   } else if (playerSum === dealerSum) {
     message = "Tie!";
     messageColor = "yellow";
   } else if (playerSum > dealerSum) {
     message = "You Win!";
     messageColor = "#4CAF50";
+    updateWallet(100);
   } else {
     message = "You Lose!";
     messageColor = "#FF4d4d";
+    updateWallet(-100);
   }
 
   resultsElement.innerText = message;
@@ -225,7 +234,16 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-//TODOLIST
-//Fix User /module ruta/ användaruppgifter/ läsenord/ Spara i cookie
-//Fix wallet / bet
-//Lär regel om split kort / nya knapp, html, css
+function updateWallet(amount) {
+  wallet += amount;
+
+  document.getElementById("balance").innerText = wallet;
+
+  //SPARA TILL MINNET: Vi sparar "wallet" under namnet "savedWallet"
+  localStorage.setItem("savedWallet", wallet);
+
+  console.log("Saldo sparat i LocalStorage: " + wallet);
+}
+
+
+//TO DO LIST 

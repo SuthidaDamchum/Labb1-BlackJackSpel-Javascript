@@ -1,6 +1,53 @@
+.game-title {
+  color: white; /* Ändrat till vit */
+  font-size: 48px;
+  text-align: center;
+  margin: 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  /* En svart skugga gör att den vita texten syns bättre mot det gröna */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "Arial", sans-serif;
+}
 
+.money-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Håller texten till vänster inuti boxen */
+
+  background-color: #000;
+  border: 2px solid #4caf50; /* Grön ram för att matcha texten */
+  padding: 10px 15px;
+  border-radius: 8px;
+
+  /* POSITIONERING */
+  width: fit-content;
+  margin-left: 10px;
+  margin-right: auto;
+
+  /* AVSTÅND: Justera denna siffra för att flytta boxen neråt */
+  margin-top: 30px;
+}
+.controls {
+  margin-top: 0px; /* Låt knapparna ligga tätt under pengarna */
+}
+
+/* Ordet "Balance" i grått/vitt så det ser proffsigt ut */
+.money-container .label {
+  color: #aaa;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* Själva summan i den GRÖNA färgen du hade innan */
+.money-container .value {
+  color: #4caf50; /* Den klassiska casino-gröna färgen */
+  font-size: 26px;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(76, 175, 80, 0.3); /* Ger ett litet grönt sken */
+}
 body {
-  background-color: #1a1a1a; 
+  background-color: #1a1a1a;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,10 +55,10 @@ body {
 }
 
 #board {
-  background-color: #2e7d32; 
+  background-color: #2e7d32;
   width: 100%;
   max-width: 1500px;
-  height: 550px;
+  height: 450px;
   display: flex;
   border: 10px solid #1b5e20;
   border-radius: 10px;
@@ -20,15 +67,15 @@ body {
 }
 
 .side {
-  flex: 1; 
+  flex: 1;
   text-align: center;
   padding: 20px;
 }
 
 .divider {
   width: 5px;
-  background-color: rgba(0, 0, 0, 0.2); 
-  height: 80%;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 90%;
   align-self: center;
 }
 
@@ -42,7 +89,7 @@ body {
 
 #PlayerCards img,
 #DealerCards img {
-  height: 200px; 
+  height: 200px;
   border-radius: 5px;
 }
 
@@ -70,11 +117,53 @@ button {
 }
 
 #results {
-  font-size: 24px;
-  color: #ffeb3b;
-  font-weight: bold;
-  text-shadow: 2px 2px black;
+  /* Positionering */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Alltid överst */
+
+  /* Design */
+  font-size: 50px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+
+  /* Färger och Effekter */
+  color: #ffffff;
+  text-shadow:
+    2px 2px 0px #000,
+    4px 4px 15px rgba(0, 0, 0, 0.8);
+
+  /* Bakgrundsplatta (gör det läsbart oavsett kort) */
+  background: rgba(0, 0, 0, 0.7); /* Halvgenomskinlig svart */
+  padding: 20px 40px;
+  border-radius: 15px;
+  border: 3px solid #ffeb3b; /* Guldkant */
+
+  /* Dölj när det inte finns något resultat */
+  display: none;
 }
+
+/* När JavaScript lägger till text, visa elementet */
+#results:not(:empty) {
+  display: block;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Snygg animation när texten dyker upp */
+@keyframes popIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
 h3 {
   color: white;
   font-family: Arial, Helvetica, sans-serif;

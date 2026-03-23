@@ -7,18 +7,30 @@
     <link rel="stylesheet" href="blackjack.css" />
     <script src="blackjack.js" defer></script>
   </head>
-  <body>
-    <h3>Dealer: <span id="dealerSum"></span></h3>
 
-    <div id="DealerCards">
-      <img id="hiddenCard" src="./cards/Back.png" />
+  <body>
+    <div id="board">
+      <div class="side">
+        <h3>Player: <span id="playerSum"></span></h3>
+        <div id="PlayerCards"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="side">
+        <h3>Dealer: <span id="dealerSum"></span></h3>
+        <div id="DealerCards">
+          <img id="hiddenCard" src="./cards/Back.png" />
+        </div>
+      </div>
+
+
     </div>
-    <p id="results"></p>
-    <h3>Player: <span id="playerSum"></span></h3>
-    <div id="PlayerCards"></div>
-    <br />
-    <button id="newGame">Deal</button>
-    <button id="moreCard">Hit</button>
-    <button id="stop">Stand</button>
+      <p id="results"></p>
+    <div class>
+      <button id="newGame">Deal</button>
+      <button id="moreCard">Hit</button>
+      <button id="stop">Stand</button>
+    </div>
   </body>
 </html>

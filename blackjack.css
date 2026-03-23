@@ -1,79 +1,84 @@
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1a1a1a; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Arial", sans-serif;
+}
+
+#board {
+  background-color: #2e7d32; 
+  width: 100%;
+  max-width: 1500px;
+  height: 550px;
+  display: flex;
+  border: 10px solid #1b5e20;
+  border-radius: 10px;
+  position: relative;
+  color: white;
+}
+
+.side {
+  flex: 1; 
   text-align: center;
-  background-image: url("./cards/blackjackbild.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  padding: 20px;
 }
 
+.divider {
+  width: 5px;
+  background-color: rgba(0, 0, 0, 0.2); 
+  height: 80%;
+  align-self: center;
+}
+
+#PlayerCards,
+#DealerCards {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#PlayerCards img,
 #DealerCards img {
-  height: 165px;
-  width: 140px;
-  margin: 2px;
-  
+  height: 200px; 
+  border-radius: 5px;
 }
 
-#PlayerCards img {
-  height: 165px;
-  width: 140px;
-  margin: 2px;
+button {
+  padding: 10px 25px;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+  margin: 10px;
 }
 
 #moreCard {
-  height: 50px;
-  width: 100px;
-  font-size: 20px;
-  background-color: white;
-  color: black; /* This ensures the text stays readable! */
-  border: none; /* Removes the default browser border */
-  padding: 10px 30px; /* Makes the button a comfortable size */
-  border-radius: 10px; /* Rounds the corners for a cleaner look */
-  cursor: pointer; /* Changes the mouse icon to a hand when hovering */
+  background-color: #4caf50;
+  color: white;
 }
-
 #stop {
-  height: 50px;
-  width: 100px;
-  font-size: 20px;
-  background-color: white;
-  color: black; /* This ensures the text stays readable! */
-  border: none; /* Removes the default browser border */
-  padding: 10px 30px; /* Makes the button a comfortable size */
-  border-radius: 10px; /* Rounds the corners for a cleaner look */
-  cursor: pointer; /* Changes the mouse icon to a hand when hovering */
+  background-color: #ffc107;
+  color: black;
 }
-
 #newGame {
-  height: 50px;
-  width: 100px;
-  font-size: 18px;
-  background-color: white;
-  color: black; /* This ensures the text stays readable! */
-  border: none; /* Removes the default browser border */ /* Makes the button a comfortable size */
-  border-radius: 10px; /* Rounds the corners for a cleaner look */
-  cursor: pointer;
+  background-color: #f44336;
+  color: white;
 }
 
+#results {
+  font-size: 24px;
+  color: #ffeb3b;
+  font-weight: bold;
+  text-shadow: 2px 2px black;
+}
 h3 {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   margin-top: 100px;
-}
-
-#results {
-  font-size: 22px;
-  font-weight: bold;
-  background-color: white;
-  padding: 10px 30 px;
-  border-radius: 10px;
-  margin: 20px 0;
-}
-
-#DealerSum,
-#PlayerSum {
-  color: #ffcc00;
-  font-weight: bold;
 }

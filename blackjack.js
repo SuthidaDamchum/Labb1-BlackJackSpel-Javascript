@@ -106,14 +106,6 @@ function hit() {
   document.getElementById("playerSum").innerText = playerSum;
   playerSum = reduceAce(playerSum, playerAcesCount);
   checkWinner();
-
-  // if (playerSum > 21) {
-  //   let message = "Dealer Wins!";
-  // }
-  //   let resultsElement = document.getElementById("results");
-  //   resultsElement.innerText = message;
-  //   ShowDealerCard = document;
-  //   document.getElementById("moreCard").disabled = true;
 }
 
 async function stand() {
@@ -234,5 +226,6 @@ function delay(ms) {
 }
 
 //TODOLIST
-//Fix wallet
+//Fix User /module ruta/ användaruppgifter/ läsenord/ Spara i cookie
+//Fix wallet / bet
 //Lär regel om split kort / nya knapp, html, css

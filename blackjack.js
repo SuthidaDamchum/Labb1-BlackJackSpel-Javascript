@@ -88,7 +88,7 @@ async function startGame() {
   cardImage.src = "./cards/" + card + ".png";
   playerSum += getCardValue(card);
   playerAcesCount += checkAces(card);
-  playerSum = reduceAce(playerSum, playerAcesCount);
+  playerSum = reducePlayerAces();
   document.getElementById("PlayerCards").append(cardImage);
   document.getElementById("playerSum").innerText = playerSum;
   // playerSum = 21;
@@ -116,38 +116,41 @@ function hit() {
   let cardImage = document.createElement("img");
   cardImage.src = "./cards/" + card + ".png";
   document.getElementById("PlayerCards").append(cardImage);
-  playerSum = reduceAce(playerSum, playerAcesCount);
+  playerSum = reducePlayerAces();
 
   document.getElementById("playerSum").innerText = playerSum;
 
   if (playerSum > 21) {
     canHit = false;
-    document.getElementById("moreCard").disabled = true;
     checkWinner();
+  } else if (playerSum === 21) {
+    canHit = false;
+    stand();
   }
 }
 
 async function stand() {
   document.getElementById("stop").disabled = true;
+
   document.getElementById("moreCard").disabled = true;
 
   document.getElementById("hiddenCard").src = "./cards/" + hiddenCard + ".png";
 
   document.getElementById("dealerSum").innerText = dealerSum;
 
-  await delay(600);
+  await delay(100);
 
   while (dealerSum < 17) {
     let moreCardToDealer = deck.pop();
     dealerSum += getCardValue(moreCardToDealer);
     dealerAcesCount += checkAces(moreCardToDealer);
-    dealerSum = reduceAce(dealerSum, dealerAcesCount);
+    dealerSum = reduceDelaerAces();
 
     let newCardToDealerImg = document.createElement("img");
     newCardToDealerImg.src = "./cards/" + moreCardToDealer + ".png";
     document.getElementById("DealerCards").append(newCardToDealerImg);
 
-    await delay(600);
+    await delay(100);
   }
   checkWinner();
 }
@@ -159,18 +162,19 @@ function deal() {
 function checkWinner() {
   let message = "";
   let messageColor = "black";
+
+  let cardPlayerOnTable = document
+    .getElementById("PlayerCards")
+    .getElementsByTagName("img").length;
+
   let resultsElement = document.getElementById("results");
   document.getElementById("hiddenCard").src = "./cards/" + hiddenCard + ".png";
   document.getElementById("dealerSum").innerText = dealerSum;
 
-  if (playerSum == 21 && dealerSum !== 21) {
+  if (playerSum === 21 && cardPlayerOnTable === 2 && dealerSum !== 21) {
     message = "BLACKJACK! ★";
     messageColor = "#FFD700";
     updateWallet(150);
-  } else if (dealerSum === 21 && playerSum !== 21) {
-    message = "Dealer Blackjack!";
-    messageColor = "#FF4d4d";
-    updateWallet(-150);
   } else if (playerSum > 21) {
     message = "Dealer Wins!";
     messageColor = "#FF4d4d";
@@ -222,12 +226,20 @@ function checkAces(card) {
   return 0;
 }
 
-function reduceAce(sum, aceCount) {
-  while (sum > 21 && aceCount > 0) {
-    sum -= 10;
-    aceCount -= 1;
+function reducePlayerAces() {
+  while (playerSum > 21 && playerAcesCount > 0) {
+    playerSum -= 10;
+    playerAcesCount -= 1;
   }
-  return sum;
+  return playerSum;
+}
+
+function reduceDelaerAces() {
+  while (dealerSum > 21 && dealerAcesCount > 0) {
+    dealerSum -= 10;
+    dealerAcesCount -= 1;
+  }
+  return dealerSum;
 }
 
 function delay(ms) {
@@ -245,5 +257,7 @@ function updateWallet(amount) {
   console.log("Saldo sparat i LocalStorage: " + wallet);
 }
 
-
-//TO DO LIST 
+//Todo list
+//Man kan ta inte mer kort om man är 21 och till dealerns tur automatisk
+//How to bet money?
+// 3 kort borde inte backjack

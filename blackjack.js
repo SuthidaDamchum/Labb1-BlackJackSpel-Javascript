@@ -261,3 +261,4 @@ function updateWallet(amount) {
 //Man kan ta inte mer kort om man är 21 och till dealerns tur automatisk
 //How to bet money?
 // 3 kort borde inte backjack
+//Created new branch

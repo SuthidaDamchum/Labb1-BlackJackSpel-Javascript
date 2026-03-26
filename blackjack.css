@@ -17,7 +17,7 @@
 
   background-color: #000;
   border: 2px solid #4caf50; /* Grön ram för att matcha texten */
-  padding: 10px 15px;
+  padding: 5px 5px;
   border-radius: 8px;
 
   /* POSITIONERING */
@@ -26,7 +26,7 @@
   margin-right: auto;
 
   /* AVSTÅND: Justera denna siffra för att flytta boxen neråt */
-  margin-top: 30px;
+  margin-top: 10px;
 }
 .controls {
   margin-top: 0px; /* Låt knapparna ligga tätt under pengarna */
@@ -106,6 +106,7 @@ button {
 #moreCard {
   background-color: #4caf50;
   color: white;
+  margin-top: 0px;
 }
 #stop {
   background-color: #ffc107;
@@ -170,4 +171,40 @@ h3 {
   font-size: 30px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   margin-top: 100px;
+}
+
+.coins {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  gap: 5px;
+  margin-top: 30px;
+  padding: 5px;
+
+  width: fit-content;
+  margin-left: 5px;
+  margin-right: auto;
+
+  margin-top: 10px;
+}
+
+.coins img {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.coins img:hover {
+  transform: scale(1.1) translateY(-10px);
+  filter: brightness(1.2);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.coins img:active {
+  transform: scale(0.95); /* Ser ut som att man trycker ner det */
 }

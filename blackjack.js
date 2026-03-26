@@ -4,6 +4,11 @@ var playerAcesCount = 0;
 var dealerAcesCount = 0;
 var hiddenCard;
 
+var chip100 = 100;
+var chip200 = 200;
+var chip500 = 500;
+var chip1000 = 1000;
+
 var wallet = Number(localStorage.getItem("savedWallet")) || 1000;
 
 window.onload = function () {
@@ -53,6 +58,23 @@ function shuffleDeck() {
     deck[randomIndex] = temporaryValue;
   }
   console.log(deck);
+}
+
+let currentBet = 0;
+
+function placeBet(amount) {
+  if (amount <= wallet) {
+    wallet -= amount; //Tabort från wallet
+    currentBet += amount;
+
+    document.getElementById("balance").innerText = wallet;
+    document.getElementById("bet-display").innerText = currentBet;
+
+    localStorage.setItem("savedWallet", wallet);
+    document.getElementById("newGame").disabled = false;
+  } else {
+    alert("You don't have enough money!");
+  }
 }
 
 async function startGame() {
@@ -258,7 +280,5 @@ function updateWallet(amount) {
 }
 
 //Todo list
-//Man kan ta inte mer kort om man är 21 och till dealerns tur automatisk
-//How to bet money?
-// 3 kort borde inte backjack
-//Created new branch
+// Kolla bet lokig
+//Separera pengar när satsa

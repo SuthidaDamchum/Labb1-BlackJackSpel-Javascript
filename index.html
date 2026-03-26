@@ -25,14 +25,24 @@
 
       <div class="side">
         <h3>Dealer: <span id="dealerSum"></span></h3>
+
         <div id="DealerCards">
           <img id="hiddenCard" src="./cards/Back.png" />
         </div>
       </div>
     </div>
+
+    <div class="top-bar"></div>
     <div class="money-container">
       <span class="label">Balance:</span>
       <span class="value">$<span id="balance">1000</span></span>
+    </div>
+
+    <div class="coins">
+      <img id="chip100" src="./coins/100.PNG" onClick="placeBet(100)" />
+      <img id="chip200" src="./coins/200.PNG" onClick="placeBet(200)" />
+      <img id="chip500" src="./coins/500.PNG" onClick="placeBet(500)" />
+      <img id="chip500" src="./coins/1000.PNG" onClick="placeBet(1000)" />
     </div>
 
     <div class>

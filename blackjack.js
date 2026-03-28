@@ -13,7 +13,7 @@ var chip200 = 200;
 var chip500 = 500;
 var chip1000 = 1000;
 
-let canHit = true;
+let canHit = false;
 
 document.getElementById("start-button").addEventListener("click", sitDown);
 
@@ -23,6 +23,10 @@ function sitDown() {
   isGameActive = true;
   isBettingTime = true;
   document.getElementById("start-button").style.display = "none";
+  document.getElementById("newGame").disabled = false;
+  document.getElementById("stop").disabled = false;
+  document.getElementById("moreCard").disabled = false;
+  setChipButtonsEnabled(true);
 
   buildDeck();
   shuffleDeck();
@@ -33,9 +37,26 @@ window.onload = function () {
   document.getElementById("moreCard").addEventListener("click", hit);
   document.getElementById("stop").addEventListener("click", stand);
   document.getElementById("newGame").addEventListener("click", deal);
+  document.getElementById("split").addEventListener("click", split);
+  document.getElementById("newGame").disabled = true;
+  document.getElementById("stop").disabled = true;
+  document.getElementById("moreCard").disabled = true;
+  document.getElementById("split").disabled = true;
+  setChipButtonsEnabled(false);
 };
 
 let deck = [];
+
+function setChipButtonsEnabled(enabled) {
+  document.querySelectorAll(".coins img").forEach((chip) => {
+    if (enabled) {
+      chip.classList.remove("disabled");
+    } else {
+      chip.classList.add("disabled");
+    }
+  });
+}
+
 function buildDeck() {
   let values = [
     "ace",
@@ -77,7 +98,7 @@ function shuffleDeck() {
 function placeBet(amount) {
   console.log("Jag klickade på myntet! Värde:", amount);
 
-  if (isBettingTime === false) {
+  if (isBettingTime === false || isGameActive === false) {
     return;
   }
 
@@ -89,15 +110,15 @@ function placeBet(amount) {
     document.getElementById("bet-display").innerText = currentBet;
 
     localStorage.setItem("savedWallet", wallet);
-    document.getElementById("newGame").disabled = false;
   } else {
     alert("You don't have enough money!");
-  }                                         
-}    
+  }
+}
 
 async function startGame() {
   document.getElementById("newGame").disabled = true;
   console.log("Nu startar spelet!");
+
   hiddenCard = deck.pop();
   dealerSum += getCardValue(hiddenCard);
   dealerAcesCount += checkAces(hiddenCard);
@@ -113,7 +134,6 @@ async function startGame() {
 
   //Player 1
   card = deck.pop();
-  // let card1 = "ace_of_spades";
 
   cardImage = document.createElement("img");
   cardImage.src = "./cards/" + card + ".png";
@@ -123,7 +143,7 @@ async function startGame() {
 
   //kort 2
   card = deck.pop();
-  // let card2 = "king_of_diamonds";
+
   cardImage = document.createElement("img");
 
   cardImage.src = "./cards/" + card + ".png";
@@ -133,6 +153,10 @@ async function startGame() {
   document.getElementById("PlayerCards").append(cardImage);
   document.getElementById("playerSum").innerText = playerSum;
   // playerSum = 21;
+
+  document.getElementById("newGame").disabled = true;
+  document.getElementById("stop").disabled = false;
+  document.getElementById("moreCard").disabled = false;
 
   if (playerSum === 21 || dealerSum === 21) {
     canHit = false;
@@ -163,12 +187,15 @@ function hit() {
     canHit = false;
     checkWinner();
   } else if (playerSum === 21) {
-    canHit = false;
     stand();
   }
 }
 
 async function stand() {
+  if (canHit === false) {
+    return;
+  }
+
   document.getElementById("stop").disabled = true;
 
   document.getElementById("moreCard").disabled = true;
@@ -202,9 +229,12 @@ function deal() {
   console.log("NU klicka deal");
 
   isBettingTime = false;
+  canHit = true;
 
   startGame();
 }
+
+function split() {}
 
 function checkWinner() {
   let message = "";
@@ -221,27 +251,29 @@ function checkWinner() {
   if (playerSum === 21 && cardPlayerOnTable === 2 && dealerSum !== 21) {
     message = "BLACKJACK! ★";
     messageColor = "#FFD700";
-    updateWallet(150);
+    updateWallet(currentBet * 2);
   } else if (playerSum > 21) {
     message = "Dealer Wins!";
     messageColor = "#FF4d4d";
-    updateWallet(-100);
+    updateWallet(0);
   } else if (dealerSum > 21) {
     message = "You Win!";
     messageColor = "#4CAF50";
-    updateWallet(100);
+    updateWallet(currentBet * 2);
   } else if (playerSum === dealerSum) {
     message = "Tie!";
+    updateWallet(currentBet);
     messageColor = "yellow";
   } else if (playerSum > dealerSum) {
     message = "You Win!";
     messageColor = "#4CAF50";
-    updateWallet(100);
+    updateWallet(currentBet * 2);
   } else {
     message = "You Lose!";
     messageColor = "#FF4d4d";
-    updateWallet(-100);
+    updateWallet(0);
   }
+  setTimeout(nextRound, 3000);
 
   resultsElement.innerText = message;
   resultsElement.style.color = messageColor;
@@ -293,8 +325,10 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function updateWallet(amount) {
+async function updateWallet(amount) {
   wallet += amount;
+
+  await delay(3500);
 
   document.getElementById("balance").innerText = wallet;
 
@@ -304,6 +338,46 @@ function updateWallet(amount) {
   console.log("Saldo sparat i LocalStorage: " + wallet);
 }
 
+function nextRound() {
+  playerCard = [];
+  dealerCard = [];
+  playerSum = 0;
+  dealerSum = 0;
+  playerAcesCount = 0;
+  dealerAcesCount = 0;
+  hiddenCard = null;
+  currentBet = 0;
+
+  document.getElementById("results").innerText = "";
+  document.getElementById("PlayerCards").innerHTML = "";
+  document.getElementById("DealerCards").innerHTML =
+    '<img id="hiddenCard" src="./cards/Back.png">';
+  document.getElementById("bet-display").innerText = "0";
+  document.getElementById("playerSum").innerText = "";
+  document.getElementById("dealerSum").innerText = "";
+
+  isBettingTime = true;
+  canHit = true;
+
+  document.getElementById("newGame").disabled = false;
+  document.getElementById("stop").disabled = true;
+  document.getElementById("moreCard").disabled = true;
+
+  buildDeck();
+  shuffleDeck();
+}
+
+function setActionButtonsDisabled(shouldBeDisabled) {
+  document.getElementById("moreCard").disabled = shouldBeDisabled;
+  document.getElementById("stop").disabled = shouldBeDisabled;
+  document.getElementById("newGame").disabled = shouldBeDisabled;
+  document.getElementById("split").disabled = shouldBeDisabled;
+}
+
 //Todo list
-// Kolla bet lokig
-//Separera pengar när satsa
+
+
+//Fix dolda kort att visar när spelet börjar
+// hur sätter default 1000 om det blir 0
+//SPLIT function
+//Gör Logga in

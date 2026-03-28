@@ -58,7 +58,7 @@ body {
   background-color: #2e7d32;
   width: 100%;
   max-width: 1500px;
-  height: 450px;
+  height: 360px;
   display: flex;
   border: 10px solid #1b5e20;
   border-radius: 10px;
@@ -170,7 +170,7 @@ h3 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 .coins {

@@ -1,20 +1,34 @@
+var isGameActive = false;
+let isBettingTime = false;
+
 var playerSum = 0;
 var dealerSum = 0;
 var playerAcesCount = 0;
 var dealerAcesCount = 0;
 var hiddenCard;
+let currentBet = 0;
 
 var chip100 = 100;
 var chip200 = 200;
 var chip500 = 500;
 var chip1000 = 1000;
 
+let canHit = true;
+
+document.getElementById("start-button").addEventListener("click", sitDown);
+
 var wallet = Number(localStorage.getItem("savedWallet")) || 1000;
 
-window.onload = function () {
+function sitDown() {
+  isGameActive = true;
+  isBettingTime = true;
+  document.getElementById("start-button").style.display = "none";
+
   buildDeck();
   shuffleDeck();
-  startGame();
+}
+
+window.onload = function () {
   document.getElementById("balance").innerText = wallet;
   document.getElementById("moreCard").addEventListener("click", hit);
   document.getElementById("stop").addEventListener("click", stand);
@@ -60,9 +74,13 @@ function shuffleDeck() {
   console.log(deck);
 }
 
-let currentBet = 0;
-
 function placeBet(amount) {
+  console.log("Jag klickade på myntet! Värde:", amount);
+
+  if (isBettingTime === false) {
+    return;
+  }
+
   if (amount <= wallet) {
     wallet -= amount; //Tabort från wallet
     currentBet += amount;
@@ -74,8 +92,8 @@ function placeBet(amount) {
     document.getElementById("newGame").disabled = false;
   } else {
     alert("You don't have enough money!");
-  }
-}
+  }                                         
+}    
 
 async function startGame() {
   document.getElementById("newGame").disabled = true;
@@ -107,6 +125,7 @@ async function startGame() {
   card = deck.pop();
   // let card2 = "king_of_diamonds";
   cardImage = document.createElement("img");
+
   cardImage.src = "./cards/" + card + ".png";
   playerSum += getCardValue(card);
   playerAcesCount += checkAces(card);
@@ -122,8 +141,6 @@ async function startGame() {
     checkWinner();
   }
 }
-
-let canHit = true;
 
 function hit() {
   if (!canHit) {
@@ -178,7 +195,15 @@ async function stand() {
 }
 
 function deal() {
-  location.reload();
+  console.log("NU klicka deal");
+  if (currentBet === 0) {
+    return;
+  }
+  console.log("NU klicka deal");
+
+  isBettingTime = false;
+
+  startGame();
 }
 
 function checkWinner() {
@@ -223,7 +248,7 @@ function checkWinner() {
 
   document.getElementById("stop").disabled = true;
   document.getElementById("moreCard").disabled = true;
-  document.getElementById("newGame").disabled = false;
+  document.getElementById("newGame").disabled = true;
 }
 
 function getCardValue(card) {

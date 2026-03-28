@@ -9,6 +9,8 @@
   </head>
 
   <body>
+
+
     <div class="header">
       <h1 class="game-title">BLACKJACK CASINO</h1>
     </div>
@@ -32,7 +34,12 @@
       </div>
     </div>
 
-    <div class="top-bar"></div>
+    
+
+<div class="status-box">
+    <h3>Bet: <span id="bet-display">0</span> $</h3>
+</div>
+
     <div class="money-container">
       <span class="label">Balance:</span>
       <span class="value">$<span id="balance">1000</span></span>
@@ -43,6 +50,9 @@
       <img id="chip200" src="./coins/200.PNG" onClick="placeBet(200)" />
       <img id="chip500" src="./coins/500.PNG" onClick="placeBet(500)" />
       <img id="chip500" src="./coins/1000.PNG" onClick="placeBet(1000)" />
+    </div>
+ 
+      <button id="start-button">SIT DOWN</button>
     </div>
 
     <div class>

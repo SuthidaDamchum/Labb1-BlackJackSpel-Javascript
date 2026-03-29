@@ -103,7 +103,6 @@ function placeBet(amount) {
   }
 
   if (amount <= wallet) {
-    wallet -= amount; //Tabort från wallet
     currentBet += amount;
 
     document.getElementById("balance").innerText = wallet;
@@ -117,7 +116,9 @@ function placeBet(amount) {
 
 async function startGame() {
   document.getElementById("newGame").disabled = true;
-  console.log("Nu startar spelet!");
+
+  const dealerHiddenCard = document.getElementById("DealerCards");
+  dealerHiddenCard.innerHTML = '<img id="hiddenCard" src="./cards/Back.png" />';
 
   hiddenCard = deck.pop();
   dealerSum += getCardValue(hiddenCard);
@@ -230,7 +231,8 @@ function deal() {
 
   isBettingTime = false;
   canHit = true;
-
+  document.getElementById("DealerCards").innerHTML =
+    '<img id="hiddenCard" src="./cards/Back.png">';
   startGame();
 }
 
@@ -350,8 +352,7 @@ function nextRound() {
 
   document.getElementById("results").innerText = "";
   document.getElementById("PlayerCards").innerHTML = "";
-  document.getElementById("DealerCards").innerHTML =
-    '<img id="hiddenCard" src="./cards/Back.png">';
+  document.getElementById("DealerCards").innerHTML = "";
   document.getElementById("bet-display").innerText = "0";
   document.getElementById("playerSum").innerText = "";
   document.getElementById("dealerSum").innerText = "";
@@ -375,7 +376,6 @@ function setActionButtonsDisabled(shouldBeDisabled) {
 }
 
 //Todo list
-
 
 //Fix dolda kort att visar när spelet börjar
 // hur sätter default 1000 om det blir 0

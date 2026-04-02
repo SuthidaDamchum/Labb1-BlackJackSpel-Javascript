@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="blackjack.js" defer></script>
+  </head>
+  <body>
+    <header>
+       <div class="header">
+      <h1 class="game-title">BLACKJACK CASINO</h1>
+    </div>
+
+    </header>
+
+    <div class="form-box login">
+      <h2>Login</h2>
+      <form action="#">
+        <div class="input-box">
+          <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+          <input type="email" required />
+          <label>Email</label>
+        </div>
+
+        <div class="input-box">
+          <span class="icon"
+            ><ion-icon name="lock-closed-outline"></ion-icon
+          ></span>
+          <input type="password" required />
+          <label>Password</label>
+        </div>
+
+        <div class="remember-forgot">
+          <label><input type="checkbox" />Remember me</label>
+          <a href="#">Forgot password</a>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+
+        <div class="login-register">
+          <p>
+            Don't have an account?
+            <a href="#" class="register-link">Register</a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

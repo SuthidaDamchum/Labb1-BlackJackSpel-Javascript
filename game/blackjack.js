@@ -23,29 +23,29 @@ function sitDown() {
   isGameActive = true;
   isBettingTime = true;
   document.getElementById("start-button").style.display = "none";
-  document.getElementById("newGame").disabled = false;
-  document.getElementById("stop").disabled = false;
-  document.getElementById("moreCard").disabled = false;
+  document.getElementById("stop").disabled = true;
+  document.getElementById("moreCard").disabled = true;
+  document.getElementById("newGame").disabled = true;
   setChipButtonsEnabled(true);
 
   buildDeck();
+
   shuffleDeck();
 }
 
 window.onload = function () {
-  document.getElementById("balance").innerText = wallet;
+  updateUI();
   document.getElementById("moreCard").addEventListener("click", hit);
   document.getElementById("stop").addEventListener("click", stand);
   document.getElementById("newGame").addEventListener("click", deal);
   document.getElementById("split").addEventListener("click", split);
+  document.getElementById("topup-money").addEventListener("click", topUpMoney);
   document.getElementById("newGame").disabled = true;
   document.getElementById("stop").disabled = true;
   document.getElementById("moreCard").disabled = true;
   document.getElementById("split").disabled = true;
   setChipButtonsEnabled(false);
 };
-
-let deck = [];
 
 function setChipButtonsEnabled(enabled) {
   document.querySelectorAll(".coins img").forEach((chip) => {
@@ -57,6 +57,7 @@ function setChipButtonsEnabled(enabled) {
   });
 }
 
+let deck = [];
 function buildDeck() {
   let values = [
     "ace",
@@ -96,18 +97,20 @@ function shuffleDeck() {
 }
 
 function placeBet(amount) {
-  console.log("Jag klickade på myntet! Värde:", amount);
-
   if (isBettingTime === false || isGameActive === false) {
     return;
   }
 
   if (amount <= wallet) {
+    wallet -= amount;
     currentBet += amount;
+
+    document.getElementById("moreCard").disabled = true;
+    document.getElementById("stop").disabled = true;
+    document.getElementById("newGame").disabled = false;
 
     document.getElementById("balance").innerText = wallet;
     document.getElementById("bet-display").innerText = currentBet;
-
     localStorage.setItem("savedWallet", wallet);
   } else {
     alert("You don't have enough money!");
@@ -118,7 +121,8 @@ async function startGame() {
   document.getElementById("newGame").disabled = true;
 
   const dealerHiddenCard = document.getElementById("DealerCards");
-  dealerHiddenCard.innerHTML = '<img id="hiddenCard" src="./cards/Back.png" />';
+  dealerHiddenCard.innerHTML =
+    '<img id="hiddenCard" src="../cards/Back.png" />';
 
   hiddenCard = deck.pop();
   dealerSum += getCardValue(hiddenCard);
@@ -127,7 +131,7 @@ async function startGame() {
   //Dealerns kort 2
   let card = deck.pop();
   let cardImage = document.createElement("img");
-  cardImage.src = "./cards/" + card + ".png";
+  cardImage.src = "../cards/" + card + ".png";
   dealerSum += getCardValue(card);
   dealerAcesCount += checkAces(card);
 
@@ -137,7 +141,7 @@ async function startGame() {
   card = deck.pop();
 
   cardImage = document.createElement("img");
-  cardImage.src = "./cards/" + card + ".png";
+  cardImage.src = "../cards/" + card + ".png";
   playerSum += getCardValue(card);
   playerAcesCount += checkAces(card);
   document.getElementById("PlayerCards").append(cardImage);
@@ -146,8 +150,7 @@ async function startGame() {
   card = deck.pop();
 
   cardImage = document.createElement("img");
-
-  cardImage.src = "./cards/" + card + ".png";
+  cardImage.src = "../cards/" + card + ".png";
   playerSum += getCardValue(card);
   playerAcesCount += checkAces(card);
   playerSum = reducePlayerAces();
@@ -178,10 +181,9 @@ function hit() {
   playerAcesCount += checkAces(card);
 
   let cardImage = document.createElement("img");
-  cardImage.src = "./cards/" + card + ".png";
+  cardImage.src = "../cards/" + card + ".png";
   document.getElementById("PlayerCards").append(cardImage);
   playerSum = reducePlayerAces();
-
   document.getElementById("playerSum").innerText = playerSum;
 
   if (playerSum > 21) {
@@ -214,7 +216,7 @@ async function stand() {
     dealerSum = reduceDelaerAces();
 
     let newCardToDealerImg = document.createElement("img");
-    newCardToDealerImg.src = "./cards/" + moreCardToDealer + ".png";
+    newCardToDealerImg.src = "../cards/" + moreCardToDealer + ".png";
     document.getElementById("DealerCards").append(newCardToDealerImg);
 
     await delay(100);
@@ -224,20 +226,23 @@ async function stand() {
 
 function deal() {
   console.log("NU klicka deal");
-  if (currentBet === 0) {
+  if (currentBet <= 0) {
+    console.log("Please place your bet först");
     return;
   }
-  console.log("NU klicka deal");
+
+  document.getElementById("stop").disabled = false;
+  document.getElementById("moreCard").disabled = false;
+  document.getElementById("newGame").disabled = false;
 
   isBettingTime = false;
   canHit = true;
   document.getElementById("DealerCards").innerHTML =
-    '<img id="hiddenCard" src="./cards/Back.png">';
+    '<img id="hiddenCard" src="../cards/Back.png">';
   startGame();
 }
 
 function split() {}
-
 function checkWinner() {
   let message = "";
   let messageColor = "black";
@@ -247,7 +252,7 @@ function checkWinner() {
     .getElementsByTagName("img").length;
 
   let resultsElement = document.getElementById("results");
-  document.getElementById("hiddenCard").src = "./cards/" + hiddenCard + ".png";
+  document.getElementById("hiddenCard").src = "../cards/" + hiddenCard + ".png";
   document.getElementById("dealerSum").innerText = dealerSum;
 
   if (playerSum === 21 && cardPlayerOnTable === 2 && dealerSum !== 21) {
@@ -283,6 +288,7 @@ function checkWinner() {
   document.getElementById("stop").disabled = true;
   document.getElementById("moreCard").disabled = true;
   document.getElementById("newGame").disabled = true;
+  updateUI();
 }
 
 function getCardValue(card) {
@@ -334,7 +340,6 @@ async function updateWallet(amount) {
 
   document.getElementById("balance").innerText = wallet;
 
-  //SPARA TILL MINNET: Vi sparar "wallet" under namnet "savedWallet"
   localStorage.setItem("savedWallet", wallet);
 
   console.log("Saldo sparat i LocalStorage: " + wallet);
@@ -360,7 +365,7 @@ function nextRound() {
   isBettingTime = true;
   canHit = true;
 
-  document.getElementById("newGame").disabled = false;
+  document.getElementById("newGame").disabled = true;
   document.getElementById("stop").disabled = true;
   document.getElementById("moreCard").disabled = true;
 
@@ -369,15 +374,37 @@ function nextRound() {
 }
 
 function setActionButtonsDisabled(shouldBeDisabled) {
+  document.getElementById("topup-money").disabled = shouldBeDisabled;
   document.getElementById("moreCard").disabled = shouldBeDisabled;
   document.getElementById("stop").disabled = shouldBeDisabled;
   document.getElementById("newGame").disabled = shouldBeDisabled;
   document.getElementById("split").disabled = shouldBeDisabled;
 }
 
-//Todo list
+function updateUI() {
+  document.getElementById("balance").innerText = wallet;
 
-//Fix dolda kort att visar när spelet börjar
-// hur sätter default 1000 om det blir 0
-//SPLIT function
+  document.getElementById("bet-display").innerText = currentBet;
+
+  if (wallet === 0) {
+    document.getElementById("topup-money").style.display = "block";
+  } else {
+    document.getElementById("topup-money").style.display = "none";
+    document.getElementById("topup-money").style.display = "none";
+  }
+}
+
+function topUpMoney() {
+  if (wallet <= 0) {
+    wallet = 1000;
+
+    document.getElementById("balance").innerText = wallet;
+    document.getElementById("topup-money").style.display = "none";
+
+    console.log("Wallet refilled to 1000!");
+  }
+}
+
+//Todo List
+// hur sätter default 1000 om det blir 0 Fix flylla på pengar istället
 //Gör Logga in

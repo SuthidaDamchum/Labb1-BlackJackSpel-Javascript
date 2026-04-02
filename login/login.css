@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center; /* Centrerar horisontellt */
+  align-items: center; /* Centrerar vertikalt */
+  min-height: 100vh;
+  background-color: #2e7d32;
+  background-size: cover;
+  background-position: center;
+}
+
+header {
+  position: absolute; /* Gör att headern inte tar upp plats i flex-mitten */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+}
+
+.form-box {
+  background: white; /* Så att du ser boxen mot det gröna */
+  padding: 40px;
+  border-radius: 10px;
+  width: 400px;
+  /* Här kan du lägga till din styling för input-box etc */
+}
+
+button.btn {
+  display: block;      /* Gör knappen till ett block-element */
+  width: 20%;         /* Tar upp hela bredden i form-boxen */
+  margin: 20px 10;   /* 20px uppe/nere, auto på sidorna centrerar den */
+}
+
+.game-title {
+  color: white; /* Ändrat till vit */
+  font-size: 48px;
+  text-align: center;
+  margin: 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  /* En svart skugga gör att den vita texten syns bättre mot det gröna */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "Arial", sans-serif;
+}
+

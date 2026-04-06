@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blackjack Casino Login</title>
     <link rel="stylesheet" href="login.css" />
+    <script src="blackjack.js" defer></script>
     <script src="login.js" defer></script>
   </head>
   <body>
@@ -13,6 +14,7 @@
       <button class="btnLogin-popup">Login</button>
     </header>
 
+    
     <div class="wrapper">
       <span class="icon-close">
         <ion-icon name="close-outline"></ion-icon>
@@ -20,24 +22,26 @@
 
       <div class="form-box login">
         <h2>Login</h2>
-        <form action="#">
+
+        <form id="login-form">
           <div class="input-box">
-            <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-            <input type="email" required />
-            <label>Email</label>
+            <span class="icon"
+              ><ion-icon name="person-outline"></ion-icon
+            ></span>
+            <input type="text" id="login-username" required />
+            <label>Username</label>
           </div>
+
           <div class="input-box">
             <span class="icon"
               ><ion-icon name="lock-closed-outline"></ion-icon
             ></span>
-            <input type="password" required />
+            <input type="password" id="login-password" required />
             <label>Password</label>
           </div>
-          <div class="remember-forgot">
-            <label><input type="checkbox" /> Remember me</label>
-            <a href="#">Forgot Password?</a>
-          </div>
-          <button type="submit" class="btn">Login</button>
+
+          <button type="submit" id="login-submit" class="btn">Login</button>
+
           <div class="login-register">
             <p>
               Don't have an account?
@@ -49,30 +53,27 @@
 
       <div class="form-box register">
         <h2>Registration</h2>
-        <form action="#">
+
+        <form id="register-form">
           <div class="input-box">
             <span class="icon"
               ><ion-icon name="person-outline"></ion-icon
             ></span>
-            <input type="text" required />
+            <input type="text" id="register-username" required />
             <label>Username</label>
           </div>
-          <div class="input-box">
-            <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-            <input type="email" required />
-            <label>Email</label>
-          </div>
+
           <div class="input-box">
             <span class="icon"
               ><ion-icon name="lock-closed-outline"></ion-icon
             ></span>
-            <input type="password" required />
+            <input type="password" id="register-password" required />
             <label>Password</label>
           </div>
-          <div class="remember-forgot">
-            <label><input type="checkbox" /> I agree to the terms</label>
-          </div>
-          <button type="submit" class="btn">Register</button>
+
+          <button type="submit" id="register-submit" class="btn">
+            Register
+          </button>
           <div class="login-register">
             <p>
               Already have an account? <a href="#" class="login-link">Login</a>

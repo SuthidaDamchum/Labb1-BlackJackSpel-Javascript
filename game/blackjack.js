@@ -15,6 +15,20 @@ var chip1000 = 1000;
 
 let canHit = false;
 
+
+let activeUser = JSON.parse(localStorage.getItem('activeUser'));
+
+if (!activeUser) {
+    
+    window.location.href = "login.html";
+} else {
+
+    let wallet = activeUser.balance;
+    document.getElementById("balance").innerText = wallet;
+    console.log("Welcome " + activeUser.username);
+}
+
+
 document.getElementById("start-button").addEventListener("click", sitDown);
 
 var wallet = Number(localStorage.getItem("savedWallet")) || 1000;
@@ -46,6 +60,30 @@ window.onload = function () {
   document.getElementById("split").disabled = true;
   setChipButtonsEnabled(false);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function setChipButtonsEnabled(enabled) {
   document.querySelectorAll(".coins img").forEach((chip) => {
@@ -222,6 +260,7 @@ async function stand() {
     await delay(100);
   }
   checkWinner();
+  saveGameData();
 }
 
 function deal() {

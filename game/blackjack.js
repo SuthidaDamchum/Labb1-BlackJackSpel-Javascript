@@ -16,17 +16,17 @@ var chip1000 = 1000;
 let canHit = false;
 
 
-let activeUser = JSON.parse(localStorage.getItem('activeUser'));
+// let activeUser = JSON.parse(localStorage.getItem('activeUser'));
 
-if (!activeUser) {
+// if (!activeUser) {
     
-    window.location.href = "login.html";
-} else {
+//     window.location.href = "login.html";
+// } else {
 
-    let wallet = activeUser.balance;
-    document.getElementById("balance").innerText = wallet;
-    console.log("Welcome " + activeUser.username);
-}
+//     let wallet = activeUser.balance;
+//     document.getElementById("balance").innerText = wallet;
+//     console.log("Welcome " + activeUser.username);
+// }
 
 
 document.getElementById("start-button").addEventListener("click", sitDown);
@@ -60,28 +60,6 @@ window.onload = function () {
   document.getElementById("split").disabled = true;
   setChipButtonsEnabled(false);
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

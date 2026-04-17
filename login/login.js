@@ -21,19 +21,31 @@ iconClose.addEventListener("click", () => {
   wrapper.classList.remove("active");
 });
 
+let allUsers = JSON.parse(localstorage.getItem("users")) || [];
 
-const loginForm = document.getElementById('login-form');
-const registerForm = document.getElementById('login-form');
+const loginForm = document.getElementById("login-form");
+const registerForm = document.getElementById("register-form");
 
-registerForm.addEventListener('submit', (e) => {
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    e.preventDeafult();
+  const user = document.getElementById("login-username").value;
+  const pass = document.getElementById("login-password").value;
 
-    const username = document.getElementById('register-username').value;
-    const password = document.getElementById('register-password').value;
-
-    console.log("register:", username , password);
-    alert("Du trykte på register name:"  + useername)
-
-
+  console.log("login:", user, pass);
+  alert("Hi! welcome to the casino:", user);
 });
+
+registerForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const username = document.getElementById("register-username").value;
+  const password = document.getElementById("register-password").value;
+
+  console.log("register:", username, password);
+  alert("Du trykte på register name:" + username);
+});
+
+function checkUserLogin() {
+  let loginUser = user;
+}

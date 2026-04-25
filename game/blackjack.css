@@ -226,15 +226,15 @@ h3 {
 }
 
 .coins img:active {
-  transform: scale(0.95); /* Ser ut som att man trycker ner det */
+  transform: scale(0.95);
 }
 
 button:disabled {
-  background-color: #2c3e50; /* En mörkare, diskret färg */
-  color: #7f8c8d; /* Grå text */
-  opacity: 0.4; /* Gör knappen 60% genomskinlig */
+  background-color: #2c3e50;
+  color: #7f8c8d;
+  opacity: 0.4;
 
-  border: 1px solid #444; /* Tydliggör att den är avstängd */
+  border: 1px solid #444;
 }
 
 .coins img.disabled {
@@ -242,4 +242,79 @@ button:disabled {
   filter: grayscale(1);
 
   pointer-events: none;
+}
+
+.exist {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+#exit {
+  background-color: #6c757d;
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#exit:hover {
+  background-color: #5a6268;
+}
+
+#exit {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.modal {
+  display: none; /* Dold som standard */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Mörk bakgrund */
+}
+
+.modal-content {
+  background-color: #222;
+  color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 2px solid gold;
+  width: 300px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.modal-buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between; /* Trycker ut innehållet till kanterna */
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+#display-name {
+    position: absolute; /* Gör att vi kan placera det fritt */
+    top: 20px;          /* 20 pixlar från toppen */
+    left: 20px;         /* 20 pixlar från vänster */
+    
+    margin: 0;          /* Tar bort standard-marginaler */
+    font-size: 1.2rem;
+    color: #ffd700;     /* Guldfärg för att passa kasinotema */
+    font-family: Arial, sans-serif;
+    text-shadow: 1px 1px 2px black; /* Gör texten lättare att läsa mot bakgrunden */
+    z-index: 100;       /* Ser till att namnet ligger överst av allt */
 }

@@ -27,7 +27,6 @@
         <h3>Dealer: <span id="dealerSum"></span></h3>
 
         <div id="DealerCards">
-          <!-- <img id="hiddenCard" src="./cards/Back.png" /> -->
         </div>
       </div>
     </div>
@@ -76,7 +75,25 @@
       <button id="newGame">Deal</button>
       <button id="moreCard">Hit</button>
       <button id="stop">Stand</button>
-      <button id="split">Split</button>
+    </div>
+
+    <div class="exit">
+      <button id="exit">Exit</button>
+    </div>
+
+    <div id="exitModal" class="modal">
+      <div class="modal-content">
+        <h3>Do you want to exit?</h3>
+        <p>You will lose the money you have bet!</p>
+        <div class="modal-buttons">
+          <button id="confirmExit">Yes, Leave</button>
+          <button id="cancleExit">Stay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="player-info">
+      <h2 id="display-name"></h2>
     </div>
   </body>
 </html>

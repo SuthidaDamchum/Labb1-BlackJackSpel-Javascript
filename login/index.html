@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Casino Login & Register</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <p id="errorMsg"></p>
+
+      <div id="login-section">
+        <h2>Logga in</h2>
+
+        <input type="text" id="login-username" placeholder="Username" />
+        <input type="password" id="login-password" placeholder="Password" />
+        <button id="loginButton">Logga in</button>
+        <p>
+          No account?
+          <span id="to-register" class="link-text">Register here</span>
+        </p>
+      </div>
+
+      <div id="register-section" style="display: none">
+        <h2>Create Account</h2>
+        <input
+          type="text"
+          id="register-username"
+          placeholder="Choose username"
+        />
+        <input
+          type="password"
+          id="register-password"
+          placeholder="Choose password"
+        />
+        <button id="registerButton">Sign Up</button>
+        <p>
+          Already have an account?
+          <span id="to-login" class="link-text">Login here</span>
+        </p>
+      </div>
+    </div>
+
+    <script src="login.js"></script>
+  </body>
+</html>

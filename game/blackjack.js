@@ -1,3 +1,13 @@
+const activePlayer = JSON.parse(localStorage.getItem("currentUser"));
+
+// if (!activePlayer) {
+//   alert("Please log in first!");
+//   window.location.href = "../login/index.html";
+// } else {
+//   console.log("Welcome to the game!", activePlayer.username);
+//   console.log("Your balance is:", activePlayer.balance);
+// }
+
 var isGameActive = false;
 let isBettingTime = false;
 
@@ -14,20 +24,6 @@ var chip500 = 500;
 var chip1000 = 1000;
 
 let canHit = false;
-
-
-// let activeUser = JSON.parse(localStorage.getItem('activeUser'));
-
-// if (!activeUser) {
-    
-//     window.location.href = "login.html";
-// } else {
-
-//     let wallet = activeUser.balance;
-//     document.getElementById("balance").innerText = wallet;
-//     console.log("Welcome " + activeUser.username);
-// }
-
 
 document.getElementById("start-button").addEventListener("click", sitDown);
 
@@ -48,20 +44,18 @@ function sitDown() {
 }
 
 window.onload = function () {
+  setupUser();
   updateUI();
   document.getElementById("moreCard").addEventListener("click", hit);
   document.getElementById("stop").addEventListener("click", stand);
   document.getElementById("newGame").addEventListener("click", deal);
-  document.getElementById("split").addEventListener("click", split);
   document.getElementById("topup-money").addEventListener("click", topUpMoney);
+  document.getElementById("exit").addEventListener("click", exit);
   document.getElementById("newGame").disabled = true;
   document.getElementById("stop").disabled = true;
   document.getElementById("moreCard").disabled = true;
-  document.getElementById("split").disabled = true;
   setChipButtonsEnabled(false);
 };
-
-
 
 function setChipButtonsEnabled(enabled) {
   document.querySelectorAll(".coins img").forEach((chip) => {
@@ -219,7 +213,7 @@ async function stand() {
 
   document.getElementById("moreCard").disabled = true;
 
-  document.getElementById("hiddenCard").src = "./cards/" + hiddenCard + ".png";
+  document.getElementById("hiddenCard").src = "../cards/" + hiddenCard + ".png";
 
   document.getElementById("dealerSum").innerText = dealerSum;
 
@@ -238,7 +232,7 @@ async function stand() {
     await delay(100);
   }
   checkWinner();
-  saveGameData();
+  updateBalanceInLocalStorage();
 }
 
 function deal() {
@@ -247,9 +241,9 @@ function deal() {
     console.log("Please place your bet först");
     return;
   }
-
   document.getElementById("stop").disabled = false;
   document.getElementById("moreCard").disabled = false;
+  document.getElementById("newGame").disabled = false;
   document.getElementById("newGame").disabled = false;
 
   isBettingTime = false;
@@ -259,7 +253,6 @@ function deal() {
   startGame();
 }
 
-function split() {}
 function checkWinner() {
   let message = "";
   let messageColor = "black";
@@ -395,7 +388,6 @@ function setActionButtonsDisabled(shouldBeDisabled) {
   document.getElementById("moreCard").disabled = shouldBeDisabled;
   document.getElementById("stop").disabled = shouldBeDisabled;
   document.getElementById("newGame").disabled = shouldBeDisabled;
-  document.getElementById("split").disabled = shouldBeDisabled;
 }
 
 function updateUI() {
@@ -419,9 +411,61 @@ function topUpMoney() {
     document.getElementById("topup-money").style.display = "none";
 
     console.log("Wallet refilled to 1000!");
+    updateBalanceInLocalStorage();
   }
 }
 
-//Todo List
-// hur sätter default 1000 om det blir 0 Fix flylla på pengar istället
-//Gör Logga in
+function updateBalanceInLocalStorage() {
+  activePlayer.balance = wallet;
+  localStorage.setItem("currentUser", JSON.stringify(activePlayer));
+
+  let allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
+
+  const userIndex = allUsers.findIndex(
+    (user) => user.username === activePlayer.username,
+  );
+
+  if (userIndex !== -1) {
+    allUsers[userIndex].balance = wallet;
+    localStorage.setItem("allUsers", JSON.stringify(allUsers));
+  }
+}
+
+function exit() {
+  if (currentBet > 0) {
+    document.getElementById("exitModal").style.display = "block";
+  } else {
+    actuallyLogout();
+  }
+}
+
+document.getElementById("confirmExit").onclick = function () {
+  actuallyLogout();
+};
+
+document.getElementById("cancleExit").onclick = function () {
+  document.getElementById("exitModal").style.display = "none";
+};
+
+function actuallyLogout() {
+  updateBalanceInLocalStorage();
+  localStorage.removeItem("currentUser");
+  window.location.href = "../login/index.html";
+}
+function setupUser() {
+  // 1. Kolla om vi har en spelare
+  if (!activePlayer) {
+    window.location.href = "../login/index.html";
+    return;
+  }
+
+  // 2. Försök hitta elementet för namnet
+  const nameElement = document.getElementById("display-name");
+
+
+  if (nameElement) {
+    nameElement.innerText = "Player: " + activePlayer.username;
+  } else {
+    console.log("Tips: Du saknar id='display-name' i din HTML!");
+  }
+}

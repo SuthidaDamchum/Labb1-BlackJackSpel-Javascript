@@ -1,5 +1,5 @@
 .game-title {
-  color: white;
+  color: white; 
   font-size: 48px;
   text-align: center;
   margin: 20px 0;
@@ -12,15 +12,15 @@
 .status-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; 
   width: 100%;
   max-width: 1200px;
   margin: 10px auto;
 }
 
 .bet-container {
-  flex: 1;
-  text-align: center;
+  flex: 1; 
+  text-align: center; 
 }
 
 .money-container {
@@ -46,250 +46,257 @@
   text-transform: uppercase;
 }
 
+
 .money-container .value {
-  color: #4caf50;
+  color: #4caf50; 
   font-size: 26px;
   font-weight: bold;
-  text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-  body {
-    background-color: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Arial", sans-serif;
-  }
+  text-shadow: 0 0 5px rgba(76, 175, 80, 0.3); 
+}
+body {
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Arial", sans-serif;
+}
 
-  #board {
-    background-color: #2e7d32;
-    width: 100%;
-    max-width: 1500px;
-    height: 360px;
-    display: flex;
-    border: 10px solid #1b5e20;
-    border-radius: 10px;
-    position: relative;
-    color: white;
-  }
+#board {
+  background-color: #2e7d32;
+  width: 100%;
+  max-width: 1500px;
+  height: 360px;
+  display: flex;
+  border: 10px solid #1b5e20;
+  border-radius: 10px;
+  position: relative;
+  color: white;
+}
 
-  .side {
-    flex: 1;
-    text-align: center;
-    padding: 20px;
-  }
+.side {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+}
 
-  .divider {
-    width: 5px;
-    background-color: rgba(0, 0, 0, 0.2);
-    height: 90%;
-    align-self: center;
-  }
+.divider {
+  width: 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 90%;
+  align-self: center;
+}
 
-  #PlayerCards,
-  #DealerCards {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-  }
+#PlayerCards,
+#DealerCards {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
 
-  #PlayerCards img,
-  #DealerCards img {
-    height: 200px;
-    border-radius: 5px;
-  }
+#PlayerCards img,
+#DealerCards img {
+  height: 200px;
+  border-radius: 5px;
+}
 
-  button {
-    padding: 15px 28px;
-    font-size: 22px;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid black;
-    cursor: pointer;
-    margin: 10px;
-  }
+button {
+  padding: 15px 28px;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+  margin: 10px;
+}
 
-  button:disabled {
-    background-color: #555;
-    color: #888;
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
+button:disabled {
+  background-color: #555;
+  color: #888;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
-  #moreCard {
-    background-color: #4caf50;
-    color: white;
-  }
-  #stop {
-    background-color: #ffc107;
-    color: black;
-  }
-  #newGame {
-    background-color: #f44336;
-    color: white;
-  }
-  #split {
-    background-color: #ffc107;
-    color: black;
-  }
+#moreCard {
+  background-color: #4caf50;
+  color: white;
+}
+#stop {
+  background-color: #ffc107;
+  color: black;
+}
+#newGame {
+  background-color: #f44336;
+  color: white;
+}
+#split {
+  background-color: #ffc107;
+  color: black;
+}
 
-  #results {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000; /* Alltid överst */
+#results {
+  /* Positionering */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Alltid överst */
 
-    font-size: 50px;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
+  /* Design */
+  font-size: 50px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
 
-    color: #ffffff;
-    text-shadow:
-      2px 2px 0px #000,
-      4px 4px 15px rgba(0, 0, 0, 0.8);
-    background: rgba(0, 0, 0, 0.7);
-    padding: 20px 40px;
-    border-radius: 15px;
-    border: 3px solid #ffeb3b;
+  /* Färger och Effekter */
+  color: #ffffff;
+  text-shadow:
+    2px 2px 0px #000,
+    4px 4px 15px rgba(0, 0, 0, 0.8);
 
-    display: none;
-  }
-  #results:not(:empty) {
-    display: block;
-    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
+  background: rgba(0, 0, 0, 0.7); 
+  padding: 20px 40px;
+  border-radius: 15px;
+  border: 3px solid #ffeb3b; 
 
-  h3 {
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    margin-top: 20px;
-  }
+  display: none;
+}
 
-  .coins {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    gap: 5px;
-    margin-top: 30px;
-    padding: 5px;
+#results:not(:empty) {
+  display: block;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-    width: fit-content;
-    margin-left: 5px;
-    margin-right: auto;
+h3 {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 20px;
+}
 
-    margin-top: 10px;
-  }
+.coins {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  gap: 5px;
+  margin-top: 30px;
+  padding: 5px;
 
-  .coins img {
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-    transition:
-      transform 0.2s ease,
-      filter 0.2s;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
+  width: fit-content;
+  margin-left: 5px;
+  margin-right: auto;
 
-  .coins img:hover {
-    transform: scale(1.1) translateY(-10px);
-    filter: brightness(1.2);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
-  }
+  margin-top: 10px;
+}
 
-  .coins img:active {
-    transform: scale(0.95);
-  }
+.coins img {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
 
-  button:disabled {
-    background-color: #2c3e50;
-    color: #7f8c8d;
-    opacity: 0.4;
+.coins img:hover {
+  transform: scale(1.1) translateY(-10px);
+  filter: brightness(1.2);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
 
-    border: 1px solid #444;
-  }
+.coins img:active {
+  transform: scale(0.95);
+}
 
-  .coins img.disabled {
-    opacity: 0.35;
-    filter: grayscale(1);
+button:disabled {
+  background-color: #2c3e50;
+  color: #7f8c8d;
+  opacity: 0.4;
 
-    pointer-events: none;
-  }
+  border: 1px solid #444;
+}
 
-  .exist {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 20px;
-    box-sizing: border-box;
-    margin-top: 10px;
-  }
+.coins img.disabled {
+  opacity: 0.35;
+  filter: grayscale(1);
 
-  #exit {
-    background-color: #6c757d;
-    color: white;
-    border: 1px solid white;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  #exit:hover {
-    background-color: #5a6268;
-  }
+  pointer-events: none;
+}
 
-  #exit {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  .modal {
-    display: none; /* Dold som standard */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Mörk bakgrund */
-  }
+.exist {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
 
-  .modal-content {
-    background-color: #222;
-    color: white;
-    margin: 15% auto;
-    padding: 20px;
-    border: 2px solid gold;
-    width: 300px;
-    text-align: center;
-    border-radius: 10px;
-  }
+#exit {
+  background-color: #6c757d;
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#exit:hover {
+  background-color: #5a6268;
+}
 
-  .modal-buttons button {
-    margin: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    width: 100%;
-  }
+#exit {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.modal {
+  display: none; /* Dold som standard */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Mörk bakgrund */
+}
 
-  #display-name {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    margin: 0;
+.modal-content {
+  background-color: #222;
+  color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 2px solid gold;
+  width: 300px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.modal-buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+#display-name {
+    position: absolute; 
+    top: 20px;         
+    left: 20px;      
+    
+    margin: 0;        
     font-size: 1.2rem;
-    color: #ffd700;
+    color: #ffd700;   
     font-family: Arial, sans-serif;
-    text-shadow: 1px 1px 2px black;
-    z-index: 100;
-  }
+    text-shadow: 1px 1px 2px black; 
+    z-index: 100;  
 }

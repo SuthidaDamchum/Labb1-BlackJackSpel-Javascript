@@ -1,1 +1,115 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle, #2e7d32 0%, #1b5e20 100%);
+  flex-direction: column;
+  align-items: center;
+  background-color: #1b5e20;
+  background-image:
+    linear-gradient(to right, rgba(27, 94, 32, 0) 0%, rgb(48, 128, 53) 50%),
+    url("../style.PNG");
 
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: auto;
+}
+.game-title {
+  color: white;
+  font-size: 48px;
+  text-align: center;
+  margin: 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 4px rgba(168, 166, 166, 0.5);
+  font-family: "Arial", sans-serif;
+}
+
+.container {
+  position: relative;
+  width: 340px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 10px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2em;
+  color: #ffd700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+}
+input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  background: rgba(226, 223, 223, 0.2);
+  color: white;
+  box-sizing: border-box;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #ffd700;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+button {
+  width: 100%;
+  background-color: #ffd700;
+  color: #1b5e20;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #ffea00;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.link-text {
+  color: #ffd700;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.link-text:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+#errorMsg {
+  color: #ff5252;
+  font-size: 0.9em;
+  min-height: 20px;
+  margin-bottom: 10px;
+}

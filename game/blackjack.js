@@ -1,13 +1,5 @@
 const activePlayer = JSON.parse(localStorage.getItem("currentUser"));
 
-// if (!activePlayer) {
-//   alert("Please log in first!");
-//   window.location.href = "../login/index.html";
-// } else {
-//   console.log("Welcome to the game!", activePlayer.username);
-//   console.log("Your balance is:", activePlayer.balance);
-// }
-
 var isGameActive = false;
 let isBettingTime = false;
 
@@ -453,16 +445,12 @@ function actuallyLogout() {
   window.location.href = "../login/index.html";
 }
 function setupUser() {
-  // 1. Kolla om vi har en spelare
   if (!activePlayer) {
     window.location.href = "../login/index.html";
     return;
   }
 
-  // 2. Försök hitta elementet för namnet
   const nameElement = document.getElementById("display-name");
-
-
   if (nameElement) {
     nameElement.innerText = "Player: " + activePlayer.username;
   } else {

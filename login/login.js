@@ -68,7 +68,6 @@ loginButton.addEventListener("click", () => {
   );
 
   if (foundUser) {
-    // VIKTIGT: setItem, inte getItem!
     localStorage.setItem("currentUser", JSON.stringify(foundUser));
     window.location.href = "../game/game.html";
   } else {
